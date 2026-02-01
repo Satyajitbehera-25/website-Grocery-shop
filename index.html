@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshNest — Online Grocery</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+      <div class="nav-logo" data-nav="home">Fresh<span>Nest</span></div>
+    </div>
+    <div class="nav-search">
+      <span class="icon">🔍</span>
+      <input type="text" placeholder="Search groceries…" id="navSearch"
+        onkeydown="if(event.key==='Enter'){showPage('search')}" />
+    </div>
+    <div class="nav-actions">
+      <button class="nav-btn" data-nav="offers">🏷️ Offers</button>
+      <button class="nav-btn" data-nav="cart">🛒 Cart <span class="badge">3</span></button>
+      <button class="nav-btn" data-nav="login">👤 Login</button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu (hidden on desktop) -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-row">
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="nav-logo" data-nav="home">Fresh<span>Nest</span></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="nav-btn" data-nav="cart">🛒</button>
+        <button class="nav-btn" data-nav="login">👤</button>
+      </div>
+    </div>
+    <div style="margin-bottom:8px">
+      <input type="text" id="mobileSearch" placeholder="Search groceries…"
+        style="width:100%;padding:10px;border-radius:10px;border:1.5px solid var(--border);font-family:inherit" />
+    </div>
+    <div class="mobile-links">
+      <a href="#" data-nav="categories">Shop by Category</a>
+      <a href="#" data-nav="offers">Offers</a>
+      <a href="#" data-nav="about">About Us</a>
+      <a href="#" data-nav="contact">Contact</a>
+      <a href="#" data-nav="faq">FAQ</a>
+      <a href="#" data-nav="containers">Containers</a>
+    </div>
+  </div>
+
+  <!-- ========== HOME ========== -->
+  <div id="page-home" class="page active">
+    <div class="banner-carousel">
+      <div style="z-index:1">
+        <h2>Fresh Delivered<br />to Your Door</h2>
+        <p>Up to 40% off on seasonal fruits & veggies</p>
+        <button class="btn" data-nav="categories">Shop Now →</button>
+      </div>
+      <div class="banner-deco"></div>
+      <div class="banner-deco2"></div>
+    </div>
+
+    <!-- Categories -->
+    <div class="section-label">
+      <h3>🛒 Shop by Category</h3><a href="#" data-nav="categories">See all →</a>
+    </div>
+    <div class="cat-pills">
+      <div class="cat-pill active" data-nav="categories"><span class="emoji">🍎</span> Fruits</div>
+      <div class="cat-pill" data-nav="categories"><span class="emoji">🥕</span> Vegetables</div>
+      <div class="cat-pill" data-nav="categories"><span class="emoji">🧀</span> Dairy</div>
+      <div class="cat-pill" data-nav="categories"><span class="emoji">🍞</span> Bakery</div>
+      <div class="cat-pill" data-nav="categories"><span class="emoji">🥩</span> Meat & Eggs</div>
+      <div class="cat-pill" data-nav="categories"><span class="emoji">🍫</span> Snacks</div>
+      <div class="cat-pill" data-nav="categories"><span class="emoji">🏠</span> Household</div>
+    </div>
+
+    <!-- Fruits showcase (responsive) -->
+    <div class="showcase-grid" id="showcase-fruits">
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍎</div>
+        <div class="product-info">
+          <div class="name">Red Apples</div>
+          <div class="weight">500 g · Shimla</div>
+          <div class="price-row"><span class="price">₹72</span></div>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍌</div>
+        <div class="product-info">
+          <div class="name">Organic Bananas</div>
+          <div class="weight">500 g · Farm Fresh</div>
+          <div class="price-row"><span class="price">₹35</span></div>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍊</div>
+        <div class="product-info">
+          <div class="name">Valencia Oranges</div>
+          <div class="weight">1 kg · Citrus</div>
+          <div class="price-row"><span class="price">₹65</span></div>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍇</div>
+        <div class="product-info">
+          <div class="name">Grapes</div>
+          <div class="weight">500 g · Seedless</div>
+          <div class="price-row"><span class="price">₹95</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vegetables showcase (responsive) -->
+    <div class="showcase-grid" id="showcase-vegetables">
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🥕</div>
+        <div class="product-info">
+          <div class="name">Carrots</div>
+          <div class="weight">500 g · Farm Fresh</div>
+          <div class="price-row"><span class="price">₹28</span></div>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🥬</div>
+        <div class="product-info">
+          <div class="name">Spinach Bundle</div>
+          <div class="weight">1 bunch · Greens</div>
+          <div class="price-row"><span class="price">₹72</span></div>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍆</div>
+        <div class="product-info">
+          <div class="name">Eggplant</div>
+          <div class="weight">1 pc · Fresh</div>
+          <div class="price-row"><span class="price">₹45</span></div>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🧅</div>
+        <div class="product-info">
+          <div class="name">Onions</div>
+          <div class="weight">1 kg · Local</div>
+          <div class="price-row"><span class="price">₹38</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Best Sellers -->
+    <div class="section-label">
+      <h3>⭐ Best Sellers</h3><a href="#">View all →</a>
+    </div>
+    <div class="grid-2" style="margin-bottom:28px">
+      <div class="product-card">
+  <div class="product-img">🍅<span class="discount-tag">20% OFF</span></div>
+        <div class="product-info">
+          <div class="name">Fresh Tomatoes</div>
+          <div class="weight">1 kg · Organic</div>
+          <div class="price-row"><span class="price">₹48</span><span class="price-old">₹60</span></div>
+          <button class="add-btn" onclick="alert('Added to cart!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+  <div class="product-img">🍌</div>
+        <div class="product-info">
+          <div class="name">Organic Bananas</div>
+          <div class="weight">500 g · Farm Fresh</div>
+          <div class="price-row"><span class="price">₹35</span><span class="price-old">₹42</span></div>
+          <button class="add-btn" onclick="alert('Added to cart!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+  <div class="product-img">🥛<span class="discount-tag">10% OFF</span></div>
+        <div class="product-info">
+          <div class="name">Full Cream Milk</div>
+          <div class="weight">1 L · Pasteurised</div>
+          <div class="price-row"><span class="price">₹54</span><span class="price-old">₹60</span></div>
+          <button class="add-btn" onclick="alert('Added to cart!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+  <div class="product-img">🧀</div>
+        <div class="product-info">
+          <div class="name">Cheddar Cheese</div>
+          <div class="weight">200 g · Imported</div>
+          <div class="price-row"><span class="price">₹110</span></div>
+          <button class="add-btn" onclick="alert('Added to cart!')">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deals of the Day -->
+    <div class="section-label">
+      <h3>🔥 Deals of the Day</h3><a href="#" data-nav="offers">All deals →</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="deal-card" data-nav="product">
+        <div class="emoji">🥬</div>
+        <div class="info">
+          <h4>Fresh Spinach Bundle</h4>
+          <p>Buy 2 get 1 free · Expires tonight</p>
+        </div>
+        <div class="deal-price">
+          <div class="price">₹72</div>
+          <div class="old">₹108</div>
+        </div>
+      </div>
+      <div class="deal-card" data-nav="product">
+        <div class="emoji">🍊</div>
+        <div class="info">
+          <h4>Valencia Oranges — 1 kg</h4>
+          <p>Flat ₹15 off · Limited stock</p>
+        </div>
+        <div class="deal-price">
+          <div class="price">₹65</div>
+          <div class="old">₹80</div>
+        </div>
+      </div>
+      <div class="deal-card" data-nav="product">
+        <div class="emoji">🥚</div>
+        <div class="info">
+          <h4>Farm Eggs (12 pack)</h4>
+          <p>Free delivery on this item</p>
+        </div>
+        <div class="deal-price">
+          <div class="price">₹58</div>
+          <div class="old">₹70</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ========== CATEGORIES ========== -->
+  <div id="page-categories" class="page">
+    <h1 class="page-title">Categories</h1>
+    <p class="page-sub">Browse all product categories</p>
+    <div class="filter-bar">
+      <button class="filter-chip active">All</button>
+      <button class="filter-chip">Under ₹50</button>
+      <button class="filter-chip">Organic</button>
+      <button class="filter-chip">Top Rated</button>
+      <button class="filter-chip">New Arrivals</button>
+    </div>
+    <div class="grid-2">
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍎<span class="discount-tag">15% OFF</span></div>
+        <div class="product-info">
+          <div class="name">Red Apples</div>
+          <div class="weight">500 g · Shimla</div>
+          <div class="price-row"><span class="price">₹72</span><span class="price-old">₹85</span></div>
+          <button class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🥕</div>
+        <div class="product-info">
+          <div class="name">Carrots</div>
+          <div class="weight">500 g · Farm Fresh</div>
+          <div class="price-row"><span class="price">₹28</span></div>
+          <button class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🧈<span class="discount-tag">25% OFF</span></div>
+        <div class="product-info">
+          <div class="name">Butter (Salted)</div>
+          <div class="weight">200 g · Amul</div>
+          <div class="price-row"><span class="price">₹48</span><span class="price-old">₹64</span></div>
+          <button class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍞</div>
+        <div class="product-info">
+          <div class="name">Whole Wheat Bread</div>
+          <div class="weight">400 g · Freshly Baked</div>
+          <div class="price-row"><span class="price">₹38</span></div>
+          <button class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🥩</div>
+        <div class="product-info">
+          <div class="name">Chicken Breast</div>
+          <div class="weight">500 g · Chilled</div>
+          <div class="price-row"><span class="price">₹145</span></div>
+          <button class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-nav="product">
+  <div class="product-img">🍫<span class="discount-tag">30% OFF</span></div>
+        <div class="product-info">
+          <div class="name">Dark Chocolate</div>
+          <div class="weight">100 g · 70% Cocoa</div>
+          <div class="price-row"><span class="price">₹56</span><span class="price-old">₹80</span></div>
+          <button class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PRODUCT DETAIL ========== -->
+  <div id="page-product" class="page">
+    <button class="btn btn-outline btn-sm" data-nav="categories" style="margin-bottom:18px">← Back</button>
+    <div class="product-detail">
+      <div class="product-detail-img">🍅</div>
+      <div class="product-detail-info">
+        <span class="tag tag-green">Organic</span>
+        <h1 style="margin-top:10px">Fresh Tomatoes</h1>
+        <div class="review-row"><span class="stars">★★★★☆</span><span
+            style="font-size:13px;color:var(--slate-light)">4.2 · 218 reviews</span></div>
+        <div class="price">₹48 <span
+            style="font-size:14px;color:var(--slate-light);text-decoration:line-through;font-weight:400">₹60</span>
+        </div>
+        <p style="font-size:13px;color:var(--slate-mid);line-height:1.5">Farm-fresh organic tomatoes sourced directly
+          from certified farms. Rich in lycopene and vitamin C. Perfect for salads, sauces, and daily cooking.</p>
+        <div><strong style="font-size:13px">Choose weight:</strong>
+          <div class="weight-opts">
+            <button class="weight-opt active">500 g</button>
+            <button class="weight-opt">1 kg</button>
+            <button class="weight-opt">2 kg</button>
+          </div>
+        </div>
+        <div style="margin-top:16px"><strong style="font-size:13px">Nutritional Info (per 100g)</strong>
+          <div class="nutri-grid">
+            <div class="nutri-item">
+              <div class="val">18</div>
+              <div class="label">Calories</div>
+            </div>
+            <div class="nutri-item">
+              <div class="val">3.9g</div>
+              <div class="label">Carbs</div>
+            </div>
+            <div class="nutri-item">
+              <div class="val">0.9g</div>
+              <div class="label">Protein</div>
+            </div>
+            <div class="nutri-item">
+              <div class="val">0.2g</div>
+              <div class="label">Fat</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-green" style="margin-top:20px;width:100%;justify-content:center" data-nav="cart">🛒 Add
+          to Cart</button>
+      </div>
+
+    </div>
+    <!-- Reviews -->
+    <div class="divider"></div>
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Customer Reviews</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="card" style="padding:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><strong style="font-size:14px">Priya
+            M.</strong><span class="stars" style="font-size:13px">★★★★★</span></div>
+        <p style="font-size:13px;color:var(--slate-mid);margin-top:4px">Super fresh and arrived well packed. Will order
+          again!</p>
+      </div>
+      <div class="card" style="padding:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><strong style="font-size:14px">Rahul
+            K.</strong><span class="stars" style="font-size:13px">★★★★☆</span></div>
+        <p style="font-size:13px;color:var(--slate-mid);margin-top:4px">Good quality. Slightly smaller than expected but
+          taste is great.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CART ========== -->
+  <div id="page-cart" class="page">
+    <h1 class="page-title">🛒 Your Cart</h1>
+    <p class="page-sub">3 items in your cart</p>
+    <div class="cart-layout">
+      <div>
+        <div class="cart-item">
+          <div class="emoji">🍅</div>
+          <div class="details">
+            <h4>Fresh Tomatoes</h4>
+            <p>1 kg · Organic</p>
+          </div>
+          <div class="qty-ctrl"><button class="qty-btn">−</button><span
+              style="font-size:15px;font-weight:600">2</span><button class="qty-btn">+</button></div>
+          <div style="font-size:16px;font-weight:700;color:var(--green);margin-left:auto">₹96</div>
+        </div>
+        <div class="cart-item">
+          <div class="emoji">🥛</div>
+          <div class="details">
+            <h4>Full Cream Milk</h4>
+            <p>1 L · Pasteurised</p>
+          </div>
+          <div class="qty-ctrl"><button class="qty-btn">−</button><span
+              style="font-size:15px;font-weight:600">1</span><button class="qty-btn">+</button></div>
+          <div style="font-size:16px;font-weight:700;color:var(--green);margin-left:auto">₹54</div>
+        </div>
+        <div class="cart-item">
+          <div class="emoji">🍌</div>
+          <div class="details">
+            <h4>Organic Bananas</h4>
+            <p>500 g · Farm Fresh</p>
+          </div>
+          <div class="qty-ctrl"><button class="qty-btn">−</button><span
+              style="font-size:15px;font-weight:600">1</span><button class="qty-btn">+</button></div>
+          <div style="font-size:16px;font-weight:700;color:var(--green);margin-left:auto">₹35</div>
+        </div>
+      </div>
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row"><span>Subtotal</span><span>₹185</span></div>
+        <div class="summary-row"><span>Delivery Fee</span><span style="color:var(--green);font-weight:600">FREE</span>
+        </div>
+        <div class="summary-row"><span>Discount</span><span style="color:var(--green)">−₹22</span></div>
+        <div class="summary-row total"><span>Total</span><span>₹163</span></div>
+        <div class="saving-badge">🎉 You're saving ₹22 on this order!</div>
+        <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:14px"
+          data-nav="checkout">Proceed to Checkout →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CHECKOUT ========== -->
+  <div id="page-checkout" class="page">
+    <h1 class="page-title">Checkout</h1>
+    <p class="page-sub">Almost there! Just a few more details.</p>
+    <div class="checkout-layout">
+      <div>
+        <div class="checkout-section">
+          <h3>📍 Delivery Address</h3>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name</label><input type="text" placeholder="Rahul Kumar" /></div>
+            <div class="form-group"><label>Phone</label><input type="text" placeholder="98765 43210" /></div>
+          </div>
+          <div class="form-group" style="margin-top:10px"><label>Address</label><input type="text"
+              placeholder="123, MG Road, Apt 4B" /></div>
+          <div class="form-row" style="margin-top:10px">
+            <div class="form-group"><label>City</label><input type="text" placeholder="Bhubaneswar" /></div>
+            <div class="form-group"><label>Pincode</label><input type="text" placeholder="751001" /></div>
+          </div>
+        </div>
+        <div class="checkout-section">
+          <h3>🕐 Delivery Slot</h3>
+          <div class="delivery-slots">
+            <button class="slot active">Today, 2–4 PM</button>
+            <button class="slot">Today, 5–7 PM</button>
+            <button class="slot">Tomorrow, 9–11 AM</button>
+            <button class="slot">Tomorrow, 2–4 PM</button>
+          </div>
+        </div>
+        <div class="checkout-section">
+          <h3>💳 Payment Method</h3>
+          <div class="pay-options">
+            <div class="pay-opt active"><span class="emoji">📱</span> UPI (Google Pay / PhonePe)</div>
+            <div class="pay-opt"><span class="emoji">💳</span> Credit / Debit Card</div>
+            <div class="pay-opt"><span class="emoji">💵</span> Cash on Delivery</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cart-summary">
+          <h3>📦 Order Summary</h3>
+          <div class="summary-row"><span>🍅 Tomatoes ×2</span><span>₹96</span></div>
+          <div class="summary-row"><span>🥛 Milk ×1</span><span>₹54</span></div>
+          <div class="summary-row"><span>🍌 Bananas ×1</span><span>₹35</span></div>
+          <div class="divider"></div>
+          <div class="summary-row"><span>Subtotal</span><span>₹185</span></div>
+          <div class="summary-row"><span>Delivery</span><span style="color:var(--green);font-weight:600">FREE</span>
+          </div>
+          <div class="summary-row"><span>Discount</span><span style="color:var(--green)">−₹22</span></div>
+          <div class="summary-row total"><span>Total</span><span>₹163</span></div>
+          <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:18px" data-nav="tracking">✓
+            Place Order</button>
+          <p style="font-size:11px;color:var(--slate-light);text-align:center;margin-top:10px">🔒 Your payment is secure
+            & encrypted</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== LOGIN/SIGNUP ========== -->
+  <div id="page-login" class="page">
+    <div class="auth-wrap">
+      <div class="logo">Fresh<span>Nest</span></div>
+      <p class="sub">Welcome back! Sign in to continue shopping.</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active">Sign In</button>
+        <button class="auth-tab">Sign Up</button>
+      </div>
+      <div class="auth-form">
+        <div class="form-group"><label>Email / Phone</label><input type="text" placeholder="you@email.com" /></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••" /></div>
+        <button class="btn btn-green" data-nav="profile">Sign In</button>
+        <div class="or-div">or continue with</div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-outline btn-sm" style="flex:1;justify-content:center">🔵 Google</button>
+          <button class="btn btn-outline btn-sm" style="flex:1;justify-content:center">📱 OTP Login</button>
+        </div>
+        <p style="font-size:12px;color:var(--slate-light);text-align:center;margin-top:4px">Forgot password? <a href="#"
+            style="color:var(--green);text-decoration:none;font-weight:600">Reset here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PROFILE ========== -->
+  <div id="page-profile" class="page">
+    <div class="profile-header">
+      <div class="profile-avatar">R</div>
+      <div>
+        <h2 style="font-size:20px;font-weight:700">Rahul Kumar</h2>
+        <p style="font-size:13px;color:var(--slate-light)">rahul.kumar@email.com</p>
+      </div>
+      <button class="btn btn-outline btn-sm" style="margin-left:auto">Edit Profile</button>
+    </div>
+    <div class="profile-cards">
+      <div class="profile-stat">
+        <div class="val">12</div>
+        <div class="label">Orders</div>
+      </div>
+      <div class="profile-stat">
+        <div class="val">₹240</div>
+        <div class="label">Wallet Balance</div>
+      </div>
+      <div class="profile-stat">
+        <div class="val">3</div>
+        <div class="label">Saved Addresses</div>
+      </div>
+      <div class="profile-stat">
+        <div class="val">🏆 Gold</div>
+        <div class="label">Membership</div>
+      </div>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-header">📦 Recent Orders <a href="#">View all</a></div>
+      <div class="profile-item"><span class="emoji">📦</span>
+        <div><strong style="font-size:13px">#ORD-2847</strong><br /><span
+            style="font-size:11px;color:var(--slate-light)">Jan 28, 2026</span></div><span class="tag tag-green"
+          style="margin-left:auto">Delivered</span>
+      </div>
+      <div class="profile-item"><span class="emoji">📦</span>
+        <div><strong style="font-size:13px">#ORD-2841</strong><br /><span
+            style="font-size:11px;color:var(--slate-light)">Jan 25, 2026</span></div><span class="tag tag-amber"
+          style="margin-left:auto">Processing</span>
+      </div>
+      <div class="profile-item"><span class="emoji">📦</span>
+        <div><strong style="font-size:13px">#ORD-2835</strong><br /><span
+            style="font-size:11px;color:var(--slate-light)">Jan 20, 2026</span></div><span class="tag tag-green"
+          style="margin-left:auto">Delivered</span>
+      </div>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-header">📍 Saved Addresses <a href="#">+ Add</a></div>
+      <div class="profile-item"><span class="emoji">🏠</span>
+        <div>123, MG Road, Apt 4B, Bhubaneswar <br /><span style="font-size:11px;color:var(--slate-light)">Home ·
+            Default</span></div><span class="right">✓</span>
+      </div>
+      <div class="profile-item"><span class="emoji">🏢</span>
+        <div>456, Infosys Campus, Tech Park <br /><span style="font-size:11px;color:var(--slate-light)">Office</span>
+        </div><span class="right">Edit</span>
+      </div>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-header">🎁 Wallet & Offers</div>
+      <div class="profile-item"><span class="emoji">💰</span>
+        <div>Wallet Balance<br /><span style="font-size:11px;color:var(--slate-light)">Use on next order</span></div>
+        <span style="font-weight:700;color:var(--green)">₹240</span>
+      </div>
+      <div class="profile-item"><span class="emoji">🏷️</span>
+        <div>Active Coupons<br /><span style="font-size:11px;color:var(--slate-light)">2 coupons available</span></div>
+        <a href="#" data-nav="offers"
+          style="color:var(--green);font-size:12px;font-weight:600;text-decoration:none">View →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ORDER TRACKING ========== -->
+  <div id="page-tracking" class="page">
+    <h1 class="page-title">📍 Order Tracking</h1>
+    <p class="page-sub">Order #ORD-2849 · Estimated delivery in 30 min</p>
+    <div
+      style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;max-width:480px">
+      <div class="tracking-steps">
+        <div class="step done">
+          <div class="step-line"></div>
+          <div class="step-dot">✓</div>
+          <div class="step-content">
+            <h4>Order Confirmed</h4>
+            <p>Jan 31, 2026 · 3:15 PM</p>
+          </div>
+        </div>
+        <div class="step done">
+          <div class="step-line"></div>
+          <div class="step-dot">✓</div>
+          <div class="step-content">
+            <h4>Being Packed</h4>
+            <p>Your items are being carefully packed</p>
+          </div>
+        </div>
+        <div class="step current">
+          <div class="step-line"></div>
+          <div class="step-dot">🚗</div>
+          <div class="step-content">
+            <h4>Out for Delivery</h4>
+            <p>On the way! ~30 minutes away</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">🏠</div>
+          <div class="step-content">
+            <h4>Delivered</h4>
+            <p>Pending</p>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><strong style="font-size:14px">Delivery Partner</strong><br /><span
+            style="font-size:12px;color:var(--slate-light)">Amit · ⭐ 4.8</span></div>
+        <button class="btn btn-outline btn-sm">📞 Call</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OFFERS ========== -->
+  <div id="page-offers" class="page">
+    <h1 class="page-title">🏷️ Offers & Deals</h1>
+    <p class="page-sub">Exclusive discounts just for you</p>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+      <div class="offer-card">
+        <div class="left">
+          <h4>🎉 Welcome Bonus</h4>
+          <p>₹100 off on your first order above ₹300</p>
+        </div>
+        <div class="code">WELCOME100</div>
+      </div>
+      <div class="offer-card">
+        <div class="left">
+          <h4>🥛 Dairy Delight</h4>
+          <p>15% off on all dairy products this week</p>
+        </div>
+        <div class="code">DAIRY15</div>
+      </div>
+      <div class="offer-card">
+        <div class="left">
+          <h4>🌿 Go Organic</h4>
+          <p>₹50 off when you buy organic items worth ₹200+</p>
+        </div>
+        <div class="code">ORGANIC50</div>
+      </div>
+      <div class="offer-card">
+        <div class="left">
+          <h4>🚚 Free Delivery</h4>
+          <p>Free delivery on all orders above ₹150</p>
+        </div>
+        <div class="code">FREEDEL</div>
+      </div>
+    </div>
+    <div class="section-label">
+      <h3>🎊 Festive Offers</h3>
+    </div>
+    <div
+      style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:var(--radius);padding:24px;margin-top:12px">
+      <h3 style="color:#92400e;font-size:18px">🪔 Republic Day Special</h3>
+      <p style="font-size:13px;color:#78350f;margin-top:4px">Flat 25% off on selected items · Valid till Jan 31</p>
+      <button class="btn btn-green" style="margin-top:14px" data-nav="categories">Shop Now →</button>
+    </div>
+  </div>
+
+  <!-- ========== SEARCH RESULTS ========== -->
+  <div id="page-search" class="page">
+    <h1 class="page-title">Search Results</h1>
+    <div class="search-input-big">
+      <input type="text" id="searchBox" placeholder="What are you looking for?" value="tomatoes" />
+      <button class="btn btn-green" onclick="handleSearch()">Search</button>
+    </div>
+    <div id="search-results">
+      <p style="font-size:13px;color:var(--slate-light);margin-bottom:14px">Showing 4 results for
+        "<strong>tomatoes</strong>"</p>
+      <div class="grid-2">
+        <div class="product-card" data-nav="product">
+          <div class="product-img">🍅<span class="discount-tag">20% OFF</span></div>
+          <div class="product-info">
+            <div class="name">Fresh Tomatoes</div>
+            <div class="weight">1 kg · Organic</div>
+            <div class="price-row"><span class="price">₹48</span><span class="price-old">₹60</span></div><button
+              class="add-btn" onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card" data-nav="product">
+          <div class="product-img">🍅</div>
+          <div class="product-info">
+            <div class="name">Cherry Tomatoes</div>
+            <div class="weight">250 g · Premium</div>
+            <div class="price-row"><span class="price">₹42</span></div><button class="add-btn"
+              onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card" data-nav="product">
+          <div class="product-img">🍅</div>
+          <div class="product-info">
+            <div class="name">Tomato Puree</div>
+            <div class="weight">400 g · Readymade</div>
+            <div class="price-row"><span class="price">₹35</span></div><button class="add-btn"
+              onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card" data-nav="product">
+          <div class="product-img">🍅</div>
+          <div class="product-info">
+            <div class="name">Tomato Sauce</div>
+            <div class="weight">350 g · Italian Style</div>
+            <div class="price-row"><span class="price">₹52</span></div><button class="add-btn"
+              onclick="event.stopPropagation();alert('Added!')">+ Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="no-results" style="display:none" class="no-results">
+      <div class="emoji">🔍</div>
+      <h3>No results found</h3>
+      <p>Hmm, we couldn't find anything for that. Try a different keyword or check your spelling!</p>
+      <button class="btn btn-green" style="margin-top:16px" data-nav="home">🏠 Back to Home</button>
+    </div>
+  </div>
+
+  <!-- ========== CONTAINERS ========== -->
+  <div id="page-containers" class="page">
+    <h1 class="page-title">🔲 Containers — Examples</h1>
+    <p class="page-sub">Demonstrations of different container types: fixed, fluid, centered, grid, and flex.</p>
+
+    <div class="container-demo">
+      <div class="card container-box">
+        <h3 style="margin-bottom:8px">Fixed-width container</h3>
+        <div class="container-fixed">This is a centered fixed-width container using <code>.container-fixed</code>. It
+          stays centered and has a max-width.</div>
+      </div>
+
+      <div class="card container-box">
+        <h3 style="margin-bottom:8px">Fluid container</h3>
+        <div class="container-fluid">This is a full-width fluid container using <code>.container-fluid</code> that
+          stretches the full width of the viewport.</div>
+      </div>
+
+      <div class="card container-box">
+        <h3 style="margin-bottom:8px">Centered content</h3>
+        <div class="container-center">Centered content using <code>.container-center</code></div>
+      </div>
+
+      <div class="card container-box">
+        <h3 style="margin-bottom:8px">Grid container</h3>
+        <div class="grid-demo">
+          <div class="grid-item">Grid item 1</div>
+          <div class="grid-item">Grid item 2</div>
+          <div class="grid-item">Grid item 3</div>
+          <div class="grid-item">Grid item 4</div>
+        </div>
+      </div>
+
+      <div class="card container-box">
+        <h3 style="margin-bottom:8px">Flex container</h3>
+        <div class="flex-demo">
+          <div class="grid-item" style="min-width:160px">Flex item A</div>
+          <div class="grid-item" style="min-width:160px">Flex item B</div>
+          <div class="grid-item" style="min-width:160px">Flex item C</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== ABOUT US ========== -->
+  <div id="page-about" class="page">
+    <div class="about-hero">
+      <h1>About FreshNest</h1>
+      <p>We believe everyone deserves access to fresh, high-quality groceries — delivered with care, right to their
+        doorstep.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="emoji">🌱</div>
+        <h4>Farm to Table</h4>
+        <p>Sourced directly from local farms for maximum freshness.</p>
+      </div>
+      <div class="about-card">
+        <div class="emoji">⚡</div>
+        <h4>Fast Delivery</h4>
+        <p>Get your groceries in under 60 minutes.</p>
+      </div>
+      <div class="about-card">
+        <div class="emoji">💚</div>
+        <h4>Eco Friendly</h4>
+        <p>Sustainable packaging and green delivery practices.</p>
+      </div>
+      <div class="about-card">
+        <div class="emoji">🤝</div>
+        <h4>Community First</h4>
+        <p>Supporting 500+ local farmers across India.</p>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px">
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:10px">Our Story</h3>
+      <p style="font-size:14px;color:var(--slate-mid);line-height:1.7">FreshNest was founded in 2022 with a simple
+        mission: make grocery shopping effortless and sustainable. We partner with over 500 local farmers to bring the
+        freshest produce to your table every single day. Our technology ensures that from the moment you place an order,
+        your groceries are picked, packed, and delivered with the utmost care.</p>
+    </div>
+  </div>
+
+  <!-- ========== CONTACT US ========== -->
+  <div id="page-contact" class="page">
+    <h1 class="page-title">Contact Us</h1>
+    <p class="page-sub">We'd love to hear from you!</p>
+    <div class="contact-grid">
+      <div class="contact-info-card">
+        <h3>📬 Get in Touch</h3>
+        <div class="contact-row"><span class="emoji">📞</span>
+          <div><strong style="font-size:13px">Customer Support</strong><br /><span
+              style="font-size:12px;color:var(--slate-light)">+91 98765 43210</span></div>
+        </div>
+        <div class="contact-row"><span class="emoji">📧</span>
+          <div><strong style="font-size:13px">Email</strong><br /><span
+              style="font-size:12px;color:var(--slate-light)">help@freshnest.in</span></div>
+        </div>
+        <div class="contact-row"><span class="emoji">📍</span>
+          <div><strong style="font-size:13px">Address</strong><br /><span
+              style="font-size:12px;color:var(--slate-light)">42, Tech Park, Bhubaneswar</span></div>
+        </div>
+        <div class="contact-row"><span class="emoji">🕐</span>
+          <div><strong style="font-size:13px">Support Hours</strong><br /><span
+              style="font-size:12px;color:var(--slate-light)">Mon–Sat, 8 AM – 10 PM</span></div>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <h3>💬 Send Feedback</h3>
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="Rahul Kumar" /></div>
+        <div class="form-group" style="margin-top:10px"><label>Email</label><input type="email"
+            placeholder="you@email.com" /></div>
+        <div class="form-group" style="margin-top:10px"><label>Message</label><textarea
+            placeholder="How can we help you?"
+            style="padding:9px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;font-family:inherit;outline:none;resize:vertical;min-height:90px;width:100%"
+            onfocus="this.style.borderColor='var(--green)'"></textarea></div>
+        <button class="btn btn-green" style="margin-top:14px;width:100%;justify-content:center">Send Message →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== FAQ ========== -->
+  <div id="page-faq" class="page">
+    <h1 class="page-title">FAQ</h1>
+    <p class="page-sub">Answers to common questions</p>
+    <div id="faq-list"></div>
+  </div>
+  </div>
+
+  <!-- FOOTER (shared) -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div>
+        <h4>Fresh<span style="color:var(--amber)">Nest</span></h4>
+        <p style="font-size:12px;margin-top:6px">Fresh groceries delivered to your doorstep. Quality you can trust.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4><a href="#" data-nav="home">Home</a><a href="#" data-nav="categories">Categories</a><a
+          href="#" data-nav="offers">Offers</a><a href="#" data-nav="about">About Us</a><a href="#"
+          data-nav="containers">Containers</a>
+      </div>
+      <div>
+        <h4>Support</h4><a href="#" data-nav="faq">FAQs</a><a href="#" data-nav="contact">Contact Us</a><a
+          href="#">Terms & Conditions</a><a href="#">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Follow Us</h4><a href="#">🐦 Twitter</a><a href="#">📸 Instagram</a><a href="#">📘 Facebook</a>
+      </div>
+    </div>
+    <div class="copy">© 2026 FreshNest. All rights reserved.</div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
